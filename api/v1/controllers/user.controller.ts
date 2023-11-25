@@ -32,3 +32,38 @@ export const register = async (req: Request, res: Response) => {
         }
     })
 }
+
+// [POST] api/v1/users/login
+export const login = async (req: Request, res: Response) => {
+    const email = req.body.email;
+    const password = md5(req.body.password);
+
+    const user = await User.findOne({
+        email,
+        deleted: false
+    })
+
+    if (!user) {
+        return res.json({
+            code: 400,
+            message: "email not exist"
+        })
+    }
+
+    if (user.password !== password) {
+        return res.json({
+            code: 400,
+            message: "password wrong"
+        })
+    }
+
+    const token = user.token;
+
+    res.json({
+        code: 200,
+        message: "login success",
+        data: {
+            token
+        }
+    })
+}
