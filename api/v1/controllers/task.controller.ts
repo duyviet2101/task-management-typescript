@@ -130,3 +130,41 @@ export const changeMulti = async (req: Request, res: Response) => {
         })
     }
 }
+
+// [POST] /api/v1/tasks/create
+export const create = async (req: Request, res: Response) => {
+    try {
+        const product = await Task.create(req.body);
+
+        res.json({
+            code: 200,
+            message: "create success"
+        })
+    } catch (error) {
+        res.json({
+            code: 400,
+            message: "create fail"
+        })
+    }
+}
+
+// [PATCH] /api/v1/tasks/edit/:id
+export const edit = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id;
+
+        await Task.updateOne({
+            _id: id
+        }, req.body)
+
+        res.json({
+            code: 200,
+            message: "update success"
+        })
+    } catch (error) {
+        res.json({
+            code: 400,
+            message: "update fail"
+        })
+    }
+}
