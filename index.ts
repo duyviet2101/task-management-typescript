@@ -9,6 +9,10 @@ const port: number | string = process.env.PORT || 3009;
 
 database.connect();
 
+//? config bodyparse
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 mainV1Routes(app);
 
 app.listen(port, () => {

@@ -7,4 +7,6 @@ router.get('', controller.index);
 
 router.get('/detail/:id', controller.detail);
 
+router.patch('/change-status/:id', controller.changesStatus);
+
 export const taskRoutes: Router = router;
