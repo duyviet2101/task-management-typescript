@@ -168,3 +168,27 @@ export const edit = async (req: Request, res: Response) => {
         })
     }
 }
+
+// [DELETE] /api/v1/tasks/delete/:id
+export const deleteTask = async (req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id;
+
+        await Task.findOneAndUpdate({
+            _id: id
+        }, {
+            deleted: true,
+            deletedAt: new Date()
+        })
+
+        res.json({
+            code: 200,
+            message: "delete success"
+        })
+    } catch (error) {
+        res.json({
+            code: 400,
+            message: "delete fail"
+        })
+    }
+}
