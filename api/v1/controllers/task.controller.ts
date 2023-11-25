@@ -94,7 +94,7 @@ export const changeMulti = async (req: Request, res: Response) => {
     try {
         const ids: string[] = req.body.ids;
         const key: string = req.body.key;
-        const value: string = req.body.value;
+        const value: string = req.body?.value;
 
         switch (key) {
             case 'status':
@@ -112,7 +112,8 @@ export const changeMulti = async (req: Request, res: Response) => {
                         $in: ids
                     }
                 }, {
-                    deleted: value
+                    deleted: true,
+                    deletedAt: new Date()
                 })
                 break;
             default:
