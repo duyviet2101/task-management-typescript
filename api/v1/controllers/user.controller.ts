@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import md5 from 'md5';
 import User from '../models/user.model';
 import { generateRandomString } from '../../../helpers/generate';
+import user from '../models/user.model';
 
 // [POST] api/v1/users/register
 export const register = async (req: Request, res: Response) => {
@@ -68,18 +69,12 @@ export const login = async (req: Request, res: Response) => {
     })
 }
 
-// [GET] api/v1/users/detail/:id
+// [GET] api/v1/users/detail/
 export const detail = async (req: Request, res: Response) => {
-    const id: string = req.params.id;
-
-    const user = await User.findOne({
-        _id: id,
-        deleted: false
-    }).select("-password -token -deleted -deletedAt -createdAt -updatedAt");
 
     res.json({
         code: 200,
         message: "success",
-        info: user
+        info: req["user"]
     })
-}
+}   
