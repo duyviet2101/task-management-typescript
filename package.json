@@ -6,7 +6,9 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "md5": "^2.3.0",
-    "mongoose": "^8.0.1"
+    "mongoose": "^8.0.1",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.5"
   },
   "name": "task-management-ts",
   "version": "1.0.0",
@@ -19,8 +21,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ts-node index.ts",
-    "start": "node index.ts"
+    "start": "node index.ts",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
