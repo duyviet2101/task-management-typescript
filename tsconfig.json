@@ -3,7 +3,7 @@
         "target": "ES6",
         "module": "commonjs",
         // "outDir": "js",
-        "strict": true,
+        // "strict": true,
         "esModuleInterop": true,
         "removeComments": true,
         "forceConsistentCasingInFileNames": true
